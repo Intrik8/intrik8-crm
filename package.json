@@ -1,0 +1,38 @@
+{
+  "name": "intrik8-crm",
+  "version": "0.1.0",
+  "description": "CRM system based on NodeJS, and MongoDB. Using a Rest Style
+                  Framework this allows for fully customizable front end along
+                  with back end by just modifing a couple configuration files.",
+  "autho": "Jason Scherer <jason.scherer@intrk8.com>",
+  "main": "server.js",
+  "contributors":[{
+    "name": "Jason Scherer",
+    "email": "jason.scherer@intrik8.com"
+    }],
+  "license": "MIT",
+  "repository": "https://github.com/intrk8/intrik8-crm",
+  "homepage": "http://intrik8.com",
+  "keywords": [
+    "crm",
+    "customer relationship management",
+    "nodejs",
+    "mongodb"
+  ],
+  "dependencies":{
+    "express": "4.13.x",
+    "mongoose": "4.0.x",
+    "body-parser": "1.13.x",
+    "jwt-simple": "0.3.x",
+    "morgan": "1.6.x"
+  },
+  "scripts":{
+    "starts": "node server.js"
+  },
+  "bugs":{
+    "url": "https://github.com/intrik8/intrik8-crm",
+  },
+  "devDependencies":{
+
+  }
+}
