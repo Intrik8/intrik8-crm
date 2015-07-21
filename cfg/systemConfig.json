@@ -1,0 +1,8 @@
+{
+  "name": "Intrik8-CRM",
+  "version": "0.1.0",
+  "modules": [{
+    "name": "customer",
+    "active": true
+    }]
+}
