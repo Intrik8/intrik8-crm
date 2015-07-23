@@ -7,6 +7,12 @@
     "active": true
     },{
       "name": "test",
-      "active": false
-      }]
+      "active": true
+      },{
+        "name": "customer",
+        "active": true
+        },{
+          "name": "test",
+          "active": true
+          }]
 }

@@ -22,7 +22,9 @@
     "mongoose": "4.0.x",
     "body-parser": "1.13.x",
     "jwt-simple": "0.3.x",
-    "morgan": "1.6.x"
+    "jade":"1.1.x",
+    "morgan": "1.6.x",
+	"colors": "*"
   },
   "scripts":{
     "starts": "node server.js"
