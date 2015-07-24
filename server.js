@@ -3,6 +3,8 @@
   Intrik8 CRM
   Version 0.1.0
 
+TODO:
+  1. Work on dynamic controller loading based on json file
 
 */
 
@@ -16,12 +18,13 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var colors = require('colors');
+var mongoose = require('mongoose');
 var systemConfig = require('./cfg/systemConfig.json');
 var pub = __dirname;
 var router = express.Router();
 var modulesEnabled = require('./lib/systemCalls').GetModulesInstalled;
-var modulesInstalled = [];
-
+var db = mongoose.connect('mongodb://localhost:27017/Intrik8-CRM');
+var app = express();
 
 console.log('Welcome to ' + systemConfig.name + '\n');
 /*
@@ -32,22 +35,22 @@ console.log('Welcome to ' + systemConfig.name + '\n');
   */
 console.log('Loading Modules:');
 for(var i=0; i<modulesEnabled.length; i++){
-    try{
-      var controller = modulesEnabled[i]+'Controller';
-      
-      eval(systemConfig.modules[i].name + "Controller = require('./controllers/" + controller+"')");
-      console.log('\tLoaded: ' + systemConfig.modules[i].name + ' - ' + 'PASSED'.green);
-    }catch(exception){
-      console.log('\tLoaded: '+ systemConfig.modules[i].name + ' - '+'FAILED - Module did not load properly.'.red);
-    }
 
+      var controller = modulesEnabled[i]+'Controller';
+      eval(systemConfig.modules[i].name + "Controller = require('./controllers/" + controller+"')");
+      /*
+      TODO:Get this to load the different routes right away...if possible
+      */
+      
+      //router.route(eval('/api/' + modulesEnabled[i])).post(eval());
+      console.log('\tLoaded: ' + systemConfig.modules[i].name + ' - ' + 'PASSED'.green);
 }
 
 /*
   Creates the app and sets up view location, engine used, and public location
   Also sets up bodyparser
   */
-var app = express();
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -67,9 +70,6 @@ app.use(function(req,res,next){
 /*
   Routes being used
 */
-router.route('/api/customers')
-  .post(customerController.postCustomer);
-
 
 /*
   Catch 404 and forwarding to error handler
@@ -80,31 +80,6 @@ router.route('/api/customers')
       next(err);
   });
 
-/*
-  development error handler
-  will print stacktrace
-*/
-  if (app.get('env') === 'development') {
-      app.use(function(err, req, res, next) {
-          res.status(err.status || 500);
-          res.render('error', {
-              message: err.message,
-              error: err
-          });
-      });
-  }
-
-/*
-  production error handler
-  no stacktraces leaked to user
-*/
-  app.use(function(err, req, res, next) {
-      res.status(err.status || 500);
-      res.render('error', {
-          message: err.message,
-          error: {}
-      });
-  });
 
 var server = app.listen(1337);
 console.log('Server loaded in: '+((new Date()).getTime()-beginning) + 'ms\nServer started at port 1337 \nCtrl+C to close');

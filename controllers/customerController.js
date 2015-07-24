@@ -10,7 +10,14 @@ exports.postCustomer = function(req, res){
     var customer = new customer();
     customer.firstName = req.body.firstName;
     customer.lastName = req.body.lastName;
-
-
-
 }
+exports.getCustomers = function(req, res){
+  //Uses the Test model to find all tests
+  customer.find(function(err, customers){
+    if (err){
+      res.send(err);
+    };
+    res.render('customer/showAllCustomers.jade');
+
+  });
+};
