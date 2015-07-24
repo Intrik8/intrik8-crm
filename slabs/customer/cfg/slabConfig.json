@@ -1,0 +1,9 @@
+{
+  "name":"customer",
+  "version": "0.0.1",
+  "description": "Basic customer database.",
+  "requirements":[{
+    "name": "core",
+    "version": "0.1.0"
+    }]
+}

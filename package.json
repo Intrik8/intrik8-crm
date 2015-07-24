@@ -24,7 +24,8 @@
     "jwt-simple": "0.3.x",
     "jade":"1.1.x",
     "morgan": "1.6.x",
-	"colors": "*"
+    "node-archiver":"0.2.0",
+    "colors": "*"
   },
   "scripts":{
     "starts": "node server.js"

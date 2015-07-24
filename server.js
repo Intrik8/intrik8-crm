@@ -22,7 +22,7 @@ var mongoose = require('mongoose');
 var systemConfig = require('./cfg/systemConfig.json');
 var pub = __dirname;
 var router = express.Router();
-var modulesEnabled = require('./lib/systemCalls').GetModulesInstalled;
+var slabsEnabled = require('./lib/systemCalls').GetSlabsInstalled;
 var db = mongoose.connect('mongodb://localhost:27017/Intrik8-CRM');
 var app = express();
 
@@ -31,19 +31,19 @@ console.log('Welcome to ' + systemConfig.name + '\n');
   Setup Controllers based on system config file, offers the ability to turn on
   and off controller
   Also creates a variable based on the name called (name)Controller.  Convention
-  needed for these modules.
+  needed for these slabs.
   */
-console.log('Loading Modules:');
-for(var i=0; i<modulesEnabled.length; i++){
-
-      var controller = modulesEnabled[i]+'Controller';
-      eval(systemConfig.modules[i].name + "Controller = require('./controllers/" + controller+"')");
+console.log('Loading Slabs:');
+for(var i=0; i < slabsEnabled.length; i++){
+      var slabName = slabsEnabled[i];
+      var controller = slabsEnabled[i]+'Controller';
+      eval(systemConfig.slabs[i].name + "Controller = require('./slabs/" + slabName+"/controllers/"+ controller +"')");
       /*
       TODO:Get this to load the different routes right away...if possible
       */
-      
-      //router.route(eval('/api/' + modulesEnabled[i])).post(eval());
-      console.log('\tLoaded: ' + systemConfig.modules[i].name + ' - ' + 'PASSED'.green);
+
+      //router.route(eval('/api/' + slabsEnabled[i])).post(eval());
+      console.log('\tLoaded: ' + systemConfig.slabs[i].name + ' - ' + 'PASSED'.green);
 }
 
 /*

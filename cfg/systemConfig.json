@@ -1,11 +1,14 @@
 {
-  "name": "Intrik8-CRM",
+  "systemName": "Intrik8-CRM",
+  "name": "core",
   "version": "0.1.0",
   "database": "mongoDB",
-  "modules": [{
-    "name": "customer",
-    "active": true
-    },{
+  "slabs": [
+    {
+      "name": "customer",
+      "active": true
+     },
+    {
       "name": "test",
       "active": false
       }]
