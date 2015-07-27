@@ -8,9 +8,7 @@ TODO:
 
 */
 
-
 //Required
-
 
 var beginning = (new Date()).getTime()
 var express = require('express');
@@ -23,10 +21,14 @@ var systemConfig = require('./cfg/systemConfig.json');
 var pub = __dirname;
 var router = express.Router();
 var slabsEnabled = require('./lib/systemCalls').GetSlabsInstalled;
-var db = mongoose.connect('mongodb://localhost:27017/Intrik8-CRM');
+var db = mongoose.connect('mongodb://localhost:27017/'+ systemConfig.systemName);
 var app = express();
-
-console.log('Welcome to ' + systemConfig.name + '\n');
+var crudOperators = [
+    'post',
+    'get',
+    'put',
+    'delete']
+console.log('Welcome to ' + systemConfig.systemName + '\n');
 /*
   Setup Controllers based on system config file, offers the ability to turn on
   and off controller
@@ -41,6 +43,13 @@ for(var i=0; i < slabsEnabled.length; i++){
       /*
       TODO:Get this to load the different routes right away...if possible
       */
+      for(var j = 0; j<crudOperators.length; j++){
+        //router.route('/api/'+ slabsEnabled[i]+').'+ crudOperators[j]+'('+systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1)+')');
+        router.route('/api/'+ slabsEnabled[i])
+              //.get(systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1))
+              console.log(systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1))
+      //console.log('router.route(\'/api/'+ slabsEnabled[i]+'\').'+ crudOperators[j]+'('+systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1)+')')
+      }
 
       //router.route(eval('/api/' + slabsEnabled[i])).post(eval());
       console.log('\tLoaded: ' + systemConfig.slabs[i].name + ' - ' + 'PASSED'.green);
