@@ -1,0 +1,9 @@
+{
+  "name":"user",
+  "version": "0.0.1",
+  "description": "This is part of the core that is used for logging into the system.",
+  "requirements":[{
+    "name": "core",
+    "version": "0.1.0"
+    }]
+}

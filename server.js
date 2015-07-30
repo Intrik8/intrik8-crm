@@ -43,13 +43,13 @@ for(var i=0; i < slabsEnabled.length; i++){
       /*
       TODO:Get this to load the different routes right away...if possible
       */
-      for(var j = 0; j<crudOperators.length; j++){
+      //for(var j = 0; j<crudOperators.length; j++){
         //router.route('/api/'+ slabsEnabled[i]+').'+ crudOperators[j]+'('+systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1)+')');
-        router.route('/api/'+ slabsEnabled[i])
+        //router.route('/api/'+ slabsEnabled[i])
               //.get(systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1))
-              console.log(systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1))
+              //console.log(systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1))
       //console.log('router.route(\'/api/'+ slabsEnabled[i]+'\').'+ crudOperators[j]+'('+systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1)+')')
-      }
+      //}
 
       //router.route(eval('/api/' + slabsEnabled[i])).post(eval());
       console.log('\tLoaded: ' + systemConfig.slabs[i].name + ' - ' + 'PASSED'.green);

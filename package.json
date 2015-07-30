@@ -25,10 +25,11 @@
     "jade":"1.1.x",
     "morgan": "1.6.x",
     "node-archiver":"0.2.0",
-    "colors": "*"
+    "colors": "1.1.x",
+    "bcrypt": "0.8.x"
   },
   "scripts":{
-    "starts": "node server.js"
+    "start": "node server.js"
   },
   "bugs":{
     "url": "https://github.com/intrik8/intrik8-crm"

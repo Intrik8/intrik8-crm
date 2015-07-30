@@ -9,7 +9,7 @@
       "active": true
      },
     {
-      "name": "test",
-      "active": false
+      "name": "user",
+      "active": true
       }]
 }
