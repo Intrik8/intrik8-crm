@@ -2,7 +2,12 @@
   "systemName": "Intrik8-CRM",
   "name": "core",
   "version": "0.1.0",
-  "database": "mongoDB",
+  "database": [{
+    "type": "mongodb",
+    "location": "mongodb://localhost",
+    "port": "27017",
+    "collectionName": "CRM"
+    }],
   "slabs": [
     {
       "name": "customer",
