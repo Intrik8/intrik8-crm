@@ -1,15 +1,40 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var bcrypt = require('bcrypt');
-var SALT_WORK_FACTOR = 10;
-var MAX_LOGIN_ATTEMPTS = 5;
-var LOCK_TIME = 2 * 60 * 60 * 1000;
+var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new Schema({
-    username: { type: String, required: true, index: { unique: true } },
-    password: { type: String, required: true },
-    loginAttempts: {type: Number, required: true, default: 0},
-    lockUntil: { type: Number}
+    username: {
+      type: String,
+      unique: true,
+      required: true
+      },
+    password: {
+      type: String,
+      required: true
+    }
 });
+
+userSchema.pre('save', function(callback){
+  var user = this;
+
+  if(!user.isModified('password')) return callback();
+
+  bcrypt.genSalt(5, function(err, salt){
+    if (err) return callback(err);
+
+    bcrypt.hash(user.password, salt, null, function(err,hash){
+      if (err) return callback(err);
+      user.password = hash;
+      callback();
+    });
+  });
+});
+
+userSchema.methods.verifyPassword = function(password, cb){
+  bcrypt.compare(password, this.password, function(err, isMatch){
+    if (err) return cb(err);
+    cb(null, isMatch);
+  });
+};
 
 module.exports = mongoose.model('user',userSchema);

@@ -13,7 +13,6 @@ TODO:
 var beginning = (new Date()).getTime()
 var express = require('express');
 var path = require('path');
-var logger = require('morgan');
 var bodyParser = require('body-parser');
 var colors = require('colors');
 var mongoose = require('mongoose');
@@ -49,14 +48,12 @@ for(var i=0; i < slabsEnabled.length; i++){
               //console.log(systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1))
       //console.log('router.route(\'/api/'+ slabsEnabled[i]+'\').'+ crudOperators[j]+'('+systemConfig.slabs[i].name+'Controller.'+crudOperators[j]+systemConfig.slabs[i].name.charAt(0).toUpperCase()+systemConfig.slabs[i].name.slice(1)+')')
       //}
-
       router.route(eval('/api/' + slabsEnabled[i])).post(eval());*/
       console.log('\tLoaded: ' + systemConfig.slabs[i].name + ' - ' + 'PASSED'.green);
 }
-router.route('/api/user')
-  .get(userController.getUsers);
-router.route('/api/user/:user_id')
-  .get(userController.getUserById);
+router.route('/users')
+  .get(userController.getUsers)
+  .post(userController.postUser);
 /*
   Creates the app and sets up view location, engine used, and public location
   Also sets up bodyparser
@@ -69,7 +66,7 @@ app.use(bodyParser.urlencoded({
   extended: true
   }));
 app.use(bodyParser.json());
-app.use(router);
+app.use('/api',router);
 /*
   Make our db accessible to our router
   */
@@ -77,11 +74,6 @@ app.use(function(req,res,next){
     req.db = db;
     next();
 });
-
-/*
-  Routes being used
-*/
-
 /*
   Catch 404 and forwarding to error handler
 */
